@@ -1,0 +1,14 @@
+#!/bin/sh
+# On removal: stop the service and drop its enable symlinks, which would
+# dangle once the unit file is gone. An upgrade leaves it running (postinst
+# restarts it).
+set -e
+
+if [ "$1" = "remove" ]; then
+  if [ -d /run/systemd/system ]; then
+    systemctl stop wt61-driver.service || true
+  fi
+  systemctl disable wt61-driver.service >/dev/null 2>&1 || true
+fi
+
+exit 0

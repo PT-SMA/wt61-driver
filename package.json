@@ -1,0 +1,27 @@
+{
+  "name": "wt61-driver",
+  "version": "0.1.0",
+  "description": "WitMotion WT61 IMU driver: serial to NDJSON over TCP",
+  "author": "Yohanes Sahante <yohanes.sahante@samuderamuliaabadi.com>",
+  "module": "index.ts",
+  "type": "module",
+  "private": true,
+  "scripts": {
+    "start": "bun run index.ts",
+    "typecheck": "bun check",
+    "test": "bun test",
+    "fixture": "bun run scripts/make-fixture.ts",
+    "dev": "bun --watch index.ts",
+    "build": "bun build ./index.ts --compile --outfile dist/wt61-driver",
+    "package:deb": "bun run scripts/build-deb.ts"
+  },
+  "devDependencies": {
+    "@types/bun": "latest"
+  },
+  "peerDependencies": {
+    "typescript": "^7"
+  },
+  "dependencies": {
+    "bun-serialport": "^0.2.0"
+  }
+}

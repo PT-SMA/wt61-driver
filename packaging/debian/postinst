@@ -1,0 +1,21 @@
+#!/bin/sh
+# Installs the unit without enabling or starting it; an upgrade restarts it
+# only if it was already running.
+set -e
+
+if [ "$1" = "configure" ]; then
+  if [ -d /run/systemd/system ]; then
+    systemctl daemon-reload || true
+    # $2 is the previously configured version: set on upgrade, empty on install
+    if [ -n "$2" ]; then
+      systemctl try-restart wt61-driver.service || true
+    fi
+  fi
+
+  if [ -z "$2" ]; then
+    echo "wt61-driver: edit /etc/default/wt61.conf, then start it with"
+    echo "  sudo systemctl enable --now wt61-driver"
+  fi
+fi
+
+exit 0

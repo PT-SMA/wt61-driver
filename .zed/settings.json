@@ -1,0 +1,26 @@
+{
+  "languages": {
+    "TypeScript": {
+      "language_servers": ["vtsls"],
+    },
+    "JavaScript": {
+      "language_servers": ["vtsls"],
+    },
+  },
+  "lsp": {
+    "vtsls": {
+      "initialization_options": {
+        "typescript": {
+          "tsdk": "./node_modules/typescript/lib",
+        },
+        "vtsls": {
+          "experimental": {
+            "completion": {
+              "enableServerSideFilter": true,
+            },
+          },
+        },
+      },
+    },
+  },
+}

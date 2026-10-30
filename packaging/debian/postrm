@@ -1,0 +1,11 @@
+#!/bin/sh
+# dpkg itself deletes /etc/default/wt61.conf on purge.
+set -e
+
+if [ "$1" = "remove" ] || [ "$1" = "purge" ]; then
+  if [ -d /run/systemd/system ]; then
+    systemctl daemon-reload || true
+  fi
+fi
+
+exit 0

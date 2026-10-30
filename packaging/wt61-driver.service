@@ -1,0 +1,18 @@
+[Unit]
+Description=WT61 IMU driver (serial to NDJSON over TCP)
+After=network.target
+
+[Service]
+# Reads /etc/default/wt61.conf (the binary's default)
+ExecStart=/usr/bin/wt61-driver
+# The driver reopens a lost serial port itself; this covers a crash or a bad config.
+Restart=on-failure
+RestartSec=5s
+
+# No account to manage: a transient user, in dialout to open /dev/ttyUSB*.
+DynamicUser=yes
+SupplementaryGroups=dialout
+# Not MemoryDenyWriteExecute=: Bun's JIT and bun:ffi need writable+executable memory.
+
+[Install]
+WantedBy=multi-user.target
